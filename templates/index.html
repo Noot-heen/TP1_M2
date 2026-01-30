@@ -1,33 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détecteur de SPAM - ISPM</title>
+    <link rel="shortcut icon" href="static/spam.png" type="image/x-icon">
+
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
-        h1 { color: #333; text-align: center; }
-        form { margin: 30px 0; }
-        textarea { width: 100%; height: 120px; padding: 10px; font-size: 16px; }
-        .input-group { margin: 15px 0; }
-        button { padding: 12px 30px; background: #007BFF; color: white; border: none; cursor: pointer; font-size: 16px; }
-        button:hover { background: #0056b3; }
-        .result { margin-top: 30px; padding: 20px; border-radius: 8px; }
-        .spam { background: #f8d7da; color: #721c24; }
-        .ham  { background: #d4edda; color: #155724; }
-        footer { margin-top: 60px; text-align: center; color: #777; font-size: 0.9em; }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin: 30px 30px;
+        }
+
+        textarea {
+            height: 120px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: rgb(92, 169, 202);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: rgb(78, 147, 177);
+        }
+
+        .btn1 {
+            border-radius: 6px;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .spam {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .ham {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+        }
     </style>
 </head>
+
 <body>
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <img src="./static/logo_ispm.png" alt="" srcset="">
+    </div>
     <h1>Détecteur de SPAM / HAM</h1>
     <p style="text-align:center;">Entrez un message court (SMS) pour savoir s'il est du spam.</p>
 
     <form method="POST">
         <div class="input-group">
             <label for="message">Votre message :</label><br>
-            <textarea name="message" id="message" placeholder="Ex: Gagnez 500€ gratuitement ! Cliquez ici..." required>{{ message if message else '' }}</textarea>
+            <textarea name="message" id="message" placeholder="Ex: Gagnez 500€ gratuitement ! Cliquez ici..."
+                required>{{ message if message else '' }}</textarea>
         </div>
-        <button type="submit">Prédire</button>
+        <button class='btn1' type="submit">Prédire</button>
     </form>
 
     {% if prediction %}
@@ -41,9 +105,10 @@
     {% endif %}
 
     <footer>
-        ISPM – Institut Supérieur Polytechnique de Madagascar<br>
-        www.ispm-edu.com<br>
-        Projet Hackathon – TP Machine Learning TALN
+        <a href="https://www.ispm-edu.com">ISPM – Institut Supérieur Polytechnique de Madagascar</a><br>
+        Projet Hackathon – TP Machine Learning TALN<br>
+        <a href="https://www.flaticon.com/free-icons/spam" title="spam icons">Spam icons created by Adrly - Flaticon</a>
     </footer>
 </body>
+
 </html>
