@@ -27,13 +27,6 @@
             <label for="message">Votre message :</label><br>
             <textarea name="message" id="message" placeholder="Ex: Gagnez 500€ gratuitement ! Cliquez ici..." required>{{ message if message else '' }}</textarea>
         </div>
-
-        <div class="input-group">
-            <label for="seuil">Seuil de décision (probabilité SPAM) : {{ seuil }}</label><br>
-            <input type="range" name="seuil" id="seuil" min="0" max="1" step="0.05" value="{{ seuil }}">
-            <small>(Plus bas = plus strict, plus de HAM ; plus haut = plus de SPAM détectés)</small>
-        </div>
-
         <button type="submit">Prédire</button>
     </form>
 

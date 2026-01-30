@@ -5,18 +5,21 @@ from nltk.corpus import stopwords
 
 app = Flask(__name__)
 
+nltk.download('stopwords')
+nltk.download('punkt')
+
 # Charge le modèle et le vectoriseur
-# model = joblib.load('model/spam_model_fr.pkl')
-# vectorizer = joblib.load('model/vectorizer_fr.pkl')
+model = joblib.load('model/spam_model_fr.pkl')
+vectorizer = joblib.load('model/vectorizer_fr.pkl')
 
 # Stop words français (comme pendant l'entraînement)
-# stop_words_fr = set(stopwords.words('french'))
+stop_words_fr = set(stopwords.words('french'))
 
-# def preprocess_fr(text):
-#     text = text.lower()
-#     tokens = nltk.word_tokenize(text)
-#     tokens = [w for w in tokens if w.isalpha() and w not in stop_words_fr]
-#     return ' '.join(tokens)
+def preprocess_fr(text):
+    text = text.lower()
+    tokens = nltk.word_tokenize(text)
+    tokens = [w for w in tokens if w.isalpha() and w not in stop_words_fr]
+    return ' '.join(tokens)
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
@@ -24,10 +27,7 @@ def main():
     confidence = None
     message = None
     seuil = 0.5  # Valeur par défaut
-    
-    # if request.method == 'GET':
-    #     return 
-    
+        
     if request.method == 'POST':
         message = request.form.get('message')
         print(message)
@@ -41,19 +41,16 @@ def main():
 
         if message:
             print(message)
-            # cleaned = preprocess_fr(message)
-            # vec = vectorizer.transform([cleaned])
-            # proba = model.predict_proba(vec)[0][1]  # Probabilité SPAM
-            # result = "SPAM" if proba >= seuil else "HAM"
-            # prediction = result
-            # confidence = round(proba * 100, 2)  # En %
+            cleaned = preprocess_fr(message)
+            vec = vectorizer.transform([cleaned])
+            proba = model.predict_proba(vec)[0][1]  # Probabilité SPAM
+            result = "SPAM" if proba >= seuil else "HAM"
+            prediction = result
+            confidence = round(proba * 100, 2)  # En %
 
     return render_template('index.html',
                             prediction=prediction,
                             confidence=confidence,
                             message=message,
-                            seuil=seuil)
-    
-
-# if __name__ == '__main__':
-#     app.run(debug=True)  # Localement
+                            seuil=seuil
+                        )
