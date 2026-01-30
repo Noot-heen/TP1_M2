@@ -28,6 +28,8 @@ Datasets :
     
 Score implémentés:
     F1: 94.%
+    Accuracy: 98.%
+
 
 **Lien-Collab** :
      https://colab.research.google.com/drive/1j2GF-GDJjrEwuG3V8rWrk4Fd-TYgg4Mf?usp=sharing&fbclid=IwY2xjawPpUjVleHRuA2FlbQIxMABicmlkETFQaE03emszUGdheDN1Q0s1c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvZdH_YJzZqLvX8JvyZUT2kVBU6xLU1Se2xPzejCb8-4rKgTv3VhW8OD4Q_t_aem_MIrjjax9Tz3iXUGiTgri3Q#scrollTo=S3Wa1TAFiEBL
