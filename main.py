@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import joblib
-import nltk
+import nltk, re
 from nltk.corpus import stopwords
 
 app = Flask(__name__)
@@ -17,6 +17,7 @@ stop_words_fr = set(stopwords.words('french'))
 
 def preprocess_fr(text):
     text = text.lower()
+    text = re.sub(r'[^\w\s]', '', text)
     tokens = nltk.word_tokenize(text)
     tokens = [w for w in tokens if w.isalpha() and w not in stop_words_fr]
     return ' '.join(tokens)
