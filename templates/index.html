@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détecteur de SPAM - ISPM</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
+        h1 { color: #333; text-align: center; }
+        form { margin: 30px 0; }
+        textarea { width: 100%; height: 120px; padding: 10px; font-size: 16px; }
+        .input-group { margin: 15px 0; }
+        button { padding: 12px 30px; background: #007BFF; color: white; border: none; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 30px; padding: 20px; border-radius: 8px; }
+        .spam { background: #f8d7da; color: #721c24; }
+        .ham  { background: #d4edda; color: #155724; }
+        footer { margin-top: 60px; text-align: center; color: #777; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>Détecteur de SPAM / HAM</h1>
+    <p style="text-align:center;">Entrez un message court (SMS) pour savoir s'il est du spam.</p>
+
+    <form method="POST">
+        <div class="input-group">
+            <label for="message">Votre message :</label><br>
+            <textarea name="message" id="message" placeholder="Ex: Gagnez 500€ gratuitement ! Cliquez ici..." required>{{ message if message else '' }}</textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="seuil">Seuil de décision (probabilité SPAM) : {{ seuil }}</label><br>
+            <input type="range" name="seuil" id="seuil" min="0" max="1" step="0.05" value="{{ seuil }}">
+            <small>(Plus bas = plus strict, plus de HAM ; plus haut = plus de SPAM détectés)</small>
+        </div>
+
+        <button type="submit">Prédire</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result {{ 'spam' if prediction == 'SPAM' else 'ham' }}">
+        <h2>Résultat : {{ prediction }}</h2>
+        <p>Score de confiance (probabilité SPAM) : <strong>{{ confidence }} %</strong></p>
+        {% if message %}
+        <p>Message analysé : <em>{{ message }}</em></p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <footer>
+        ISPM – Institut Supérieur Polytechnique de Madagascar<br>
+        www.ispm-edu.com<br>
+        Projet Hackathon – TP Machine Learning TALN
+    </footer>
+</body>
+</html>
